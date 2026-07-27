@@ -119,6 +119,7 @@ let platoPrincipal = '';
 let platoSegundo = '';
 let platoPostre = '';
 let platoExtra = '';
+let noExtra = false;
 const incrementoCena = 1.20; // Incremento del 20% para el menú de cena
 
 
@@ -165,7 +166,7 @@ do {
     try {
     hora = prompt("¿Qué hora es?");
     if (hora===null) {
-        console.log("Entrada cancelada por el usuario.");
+        alert("Entrada cancelada por el usuario.");
         horaCorrecta = false;
         break; // Salir del bucle si el usuario cancela la entrada
     }
@@ -275,8 +276,21 @@ function mostrarFactura(platoPrincipal, platoSegundo, platoPostre, platoExtra, t
     const platoPrincipalObj = menu.find(item => item.nombre.toLowerCase() === platoPrincipal.toLowerCase() && item.tipo === "principal");
     const platoSegundoObj = menu.find(item => item.nombre.toLowerCase() === platoSegundo.toLowerCase() && item.tipo === "segundo");
     const platoPostreObj = menu.find(item => item.nombre.toLowerCase() === platoPostre.toLowerCase() && item.tipo === "postre");
-    const platoExtraObj = menu.find(item => item.nombre.toLowerCase() === platoExtra.toLowerCase() && item.tipo === "extra");
     
+    // Hay que comprobar que se haya elegido un plato extra
+
+// ¡¡¡Esto falla!!!
+
+    if (platoExtra === null) {
+        noExtra = true;
+    } else if (platoExtra.toLowerCase() ==="nada") {
+            const platoExtraObj = menu.find(item => item.nombre.toLowerCase() === platoExtra.toLowerCase() && item.tipo === "extra");
+            noExtra = false;
+    } else {
+            noExtra = true;
+    }
+
+
     let total = 0;
     let factura = "Factura:\n\n";
     let linea ="";
@@ -342,7 +356,7 @@ let extraSeleccionado = false;
 
 do {
     if (miturno === 0 || miturno === 4 || miturno === 5) {
-        console.log("No se puede realizar un pedido fuera del horario de servicio.");
+        alert("No se puede realizar un pedido fuera del horario de servicio.");
         break;
     }
     for (let i = 1; i <= 4; i++) {
@@ -363,7 +377,7 @@ do {
             break;
             }
           
-            console.log(comentarioAleatorio(comentarios));
+            alert(comentarioAleatorio(comentarios));
             break;
 
         case 2:
@@ -379,7 +393,7 @@ do {
                 i-=1; 
             break;
             }
-            console.log(comentarioAleatorio(comentarios));
+            alert(comentarioAleatorio(comentarios));
             break;
 
         case 3:
@@ -396,7 +410,7 @@ do {
                 i-=1; 
             break;
             }
-            console.log(comentarioAleatorio(comentarios));
+            alert(comentarioAleatorio(comentarios));
             break;
 
         case 4:
@@ -415,7 +429,7 @@ do {
             break;
             }
             if (!i === 4 || !extraSeleccionado) {
-                console.log(comentarioAleatorio(comentarios));
+                alert(comentarioAleatorio(comentarios));
             }
             break;
 
